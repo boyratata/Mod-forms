@@ -193,13 +193,8 @@
 
             const webhookUrl = 'https://discord.com/api/webhooks/1278348687948382249/y49wvlDAxdCL1O84RhYkvuSotXzyvQKGx9t-Xb5TesjF_rCA2FPyLPDO6P2A8fcHj3SM';
 
-            const imageFile = formData.get('photo');
-            let imageUrl = '';
-
-            if (imageFile) {
-                // im smoothing deez nut
-                // imageUrl = 'URL_TO_UPLOADED_IMAGE';
-            }
+            // Handle image URL
+            const imageUrl = formData.get('imageUrl') || '';
 
             const embed = {
                 content: `New application from ${formData.get('discordUsername')}`,

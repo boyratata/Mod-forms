@@ -193,83 +193,92 @@
 
             const webhookUrl = 'https://discord.com/api/webhooks/1278348687948382249/y49wvlDAxdCL1O84RhYkvuSotXzyvQKGx9t-Xb5TesjF_rCA2FPyLPDO6P2A8fcHj3SM';
 
-            // Handle image URL
-            const imageUrl = formData.get('imageUrl') || '';
-
-            const embed = {
-                content: `New application from ${formData.get('discordUsername')}`,
-                embeds: [
-                    {
-                        title: 'Moderator Application',
-                        description: formData.get('motivation'),
-                        fields: [
+            // Handle image file
+            const imageFile = formData.get('photo');
+            if (imageFile && imageFile.size > 0) {
+                const reader = new FileReader();
+                reader.onloadend = async () => {
+                    const imageUrl = reader.result;
+                    
+                    const embed = {
+                        content: `New application from ${formData.get('discordUsername')}`,
+                        embeds: [
                             {
-                                name: 'How long have you been in the server?',
-                                value: formData.get('timeInServer'),
-                                inline: true
-                            },
-                            {
-                                name: 'Are you 18 or above?',
-                                value: formData.get('age'),
-                                inline: true
-                            },
-                            {
-                                name: 'Valid Government-issued ID?',
-                                value: formData.get('id'),
-                                inline: true
-                            },
-                            {
-                                name: 'Discord Username',
-                                value: formData.get('discordUsername'),
-                                inline: true
-                            },
-                            {
-                                name: 'Hours per Week',
-                                value: formData.get('hoursPerWeek'),
-                                inline: true
-                            },
-                            {
-                                name: 'Experience',
-                                value: formData.get('experience'),
-                                inline: false
-                            },
-                            {
-                                name: 'Conflict Resolution',
-                                value: formData.get('conflictResolution'),
-                                inline: false
-                            },
-                            {
-                                name: 'Additional Info',
-                                value: formData.get('additionalInfo') || 'N/A',
-                                inline: false
+                                title: 'Moderator Application',
+                                description: formData.get('motivation'),
+                                fields: [
+                                    {
+                                        name: 'How long have you been in the server?',
+                                        value: formData.get('timeInServer'),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Are you 18 or above?',
+                                        value: formData.get('age'),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Valid Government-issued ID?',
+                                        value: formData.get('id'),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Discord Username',
+                                        value: formData.get('discordUsername'),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Hours per Week',
+                                        value: formData.get('hoursPerWeek'),
+                                        inline: true
+                                    },
+                                    {
+                                        name: 'Experience',
+                                        value: formData.get('experience'),
+                                        inline: false
+                                    },
+                                    {
+                                        name: 'Conflict Resolution',
+                                        value: formData.get('conflictResolution'),
+                                        inline: false
+                                    },
+                                    {
+                                        name: 'Additional Info',
+                                        value: formData.get('additionalInfo') || 'N/A',
+                                        inline: false
+                                    }
+                                ],
+                                image: {
+                                    url: imageUrl
+                                },
+                                color: 0x9b59b6 
                             }
-                        ],
-                        image: {
-                            url: imageUrl
-                        },
-                        color: 0x9b59b6 
+                        ]
+                    };
+
+                    try {
+                        const response = await fetch(webhookUrl, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(embed)
+                        });
+
+                        if (response.ok) {
+                            alert('Submission successful!');
+                            form.reset();
+                        } else {
+                            alert('Failed to submit the form.');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('Error submitting the form.');
                     }
-                ]
-            };
-
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(embed)
-                });
-
-                if (response.ok) {
-                    alert('Submission successful!');
-                    form.reset();
-                } else {
-                    alert('Failed to submit the form.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error submitting the form.');
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                alert('Please upload a photo.');
             }
         });
     </script>

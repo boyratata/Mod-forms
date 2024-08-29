@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+	<link rel="icon" type="image/png" href="https://github.com/boyratata/Mod-forms/blob/main/pngegg.png?raw=true">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moderator Recruitment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4e6f4; /* Light purple background */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow-y: scroll; /* Ensure scrollbar is visible */
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: #ffffff; /* White background for form container */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden; /* Hide default scrollbars */
+        }
+        h1 {
+            text-align: center;
+            color: #5c2a5c; /* Darker purple for title */
+            margin-bottom: 20px;
+        }
+        p {
+            text-align: center;
+            color: #5c2a5c; /* Darker purple for description */
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #5c2a5c; /* Darker purple for labels */
+        }
+        input[type="text"], input[type="email"], textarea, input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+            border: 2px solid #d9a3d9; /* Light purple border */
+            border-radius: 10px; /* Rounded corners */
+            background-color: #f4e6f4; /* Light purple background for fields */
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        input[type="submit"] {
+            background-color: #d9a3d9; /* Light purple button */
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            display: block;
+            width: 100%;
+        }
+        input[type="submit"]:hover {
+            background-color: #c79bc8; /* Slightly darker purple on hover */
+        }
+        .github-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .github-link a {
+            color: #5c2a5c; /* Darker purple for link */
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .github-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Custom Scrollbar Styles */
+        ::-webkit-scrollbar {
+            width: 12px; /* Width of the scrollbar */
+            background-color: #f4e6f4; /* Light purple background */
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #d9a3d9; /* Light purple scrollbar thumb */
+            border-radius: 10px; /* Rounded corners for the thumb */
+            border: 3px solid #f4e6f4; /* Space around thumb for a cleaner look */
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #c79bc8; /* Slightly darker purple on hover */
+        }
+
+        ::-webkit-scrollbar-track {
+            background-color: #f4e6f4; /* Light purple background for the track */
+            border-radius: 10px; /* Rounded corners for the track */
+        }
+
+        /* For Firefox */
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: #d9a3d9 #f4e6f4;
+        }
+
+        /* For Firefox Hover Effect */
+        html::-moz-scrollbar-thumb {
+            background-color: #d9a3d9;
+            border-radius: 10px;
+        }
+
+        html::-moz-scrollbar-thumb:hover {
+            background-color: #c79bc8;
+        }
+
+        html::-moz-scrollbar-track {
+            background-color: #f4e6f4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Moderator Recruitment</h1>
+        <p>Thank you for your interest in becoming a moderator for our Discord server! Moderators play a key role in maintaining a friendly and safe environment for all members. This application will help us get to know you better and assess if you'd be a good fit for our mod team.<br>
+        Please take your time to answer each question thoughtfully. We will review all applications and contact you if you're selected for the next stage of the process. Good luck, and thank you for your interest in contributing to our community!</p>
+        
+        <form id="submissionForm">
+            <div class="form-group">
+                <label for="timeInServer">How long have you been in the server?</label>
+                <input type="text" id="timeInServer" name="timeInServer" required>
+            </div>
+            <div class="form-group">
+                <label for="age">Are you 18 or above?</label>
+                <input type="text" id="age" name="age" required>
+            </div>
+            <div class="form-group">
+                <label for="id">Do you have a valid government-issued ID that you can provide upon request?</label>
+                <input type="text" id="id" name="id" required>
+            </div>
+            <div class="form-group">
+                <label for="photo">Please upload a recent photo of yourself:</label>
+                <input type="file" id="photo" name="photo" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <label for="discordUsername">What is your Discord username?</label>
+                <input type="text" id="discordUsername" name="discordUsername" required>
+            </div>
+            <div class="form-group">
+                <label for="hoursPerWeek">How many hours per week can you dedicate to moderating the server?</label>
+                <input type="text" id="hoursPerWeek" name="hoursPerWeek" required>
+            </div>
+            <div class="form-group">
+                <label for="experience">Do you have any prior experience as a moderator or in community management? If yes, please describe it:</label>
+                <textarea id="experience" name="experience" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="conflictResolution">How would you handle a situation where two members are arguing in a chatroom?</label>
+                <textarea id="conflictResolution" name="conflictResolution" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="motivation">Why do you want to become a moderator for our Discord server?</label>
+                <textarea id="motivation" name="motivation" required></textarea>
+            </div>
+            <div class="form-group">
+                <label for="additionalInfo">Is there anything else you'd like us to know about you? (Not required)</label>
+                <textarea id="additionalInfo" name="additionalInfo"></textarea>
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+
+        <div class="github-link">
+            <p>Check out our GitHub: <a href="https://github.com/boyratata" target="_blank">GitHub Repository</a></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('submissionForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            const webhookUrl = 'https://discord.com/api/webhooks/1278348687948382249/y49wvlDAxdCL1O84RhYkvuSotXzyvQKGx9t-Xb5TesjF_rCA2FPyLPDO6P2A8fcHj3SM';
+
+            const imageFile = formData.get('photo');
+            let imageUrl = '';
+
+            if (imageFile) {
+                // im smoothing deez nut
+                // imageUrl = 'URL_TO_UPLOADED_IMAGE';
+            }
+
+            const embed = {
+                content: `New application from ${formData.get('discordUsername')}`,
+                embeds: [
+                    {
+                        title: 'Moderator Application',
+                        description: formData.get('motivation'),
+                        fields: [
+                            {
+                                name: 'How long have you been in the server?',
+                                value: formData.get('timeInServer'),
+                                inline: true
+                            },
+                            {
+                                name: 'Are you 18 or above?',
+                                value: formData.get('age'),
+                                inline: true
+                            },
+                            {
+                                name: 'Valid Government-issued ID?',
+                                value: formData.get('id'),
+                                inline: true
+                            },
+                            {
+                                name: 'Discord Username',
+                                value: formData.get('discordUsername'),
+                                inline: true
+                            },
+                            {
+                                name: 'Hours per Week',
+                                value: formData.get('hoursPerWeek'),
+                                inline: true
+                            },
+                            {
+                                name: 'Experience',
+                                value: formData.get('experience'),
+                                inline: false
+                            },
+                            {
+                                name: 'Conflict Resolution',
+                                value: formData.get('conflictResolution'),
+                                inline: false
+                            },
+                            {
+                                name: 'Additional Info',
+                                value: formData.get('additionalInfo') || 'N/A',
+                                inline: false
+                            }
+                        ],
+                        image: {
+                            url: imageUrl
+                        },
+                        color: 0x9b59b6 
+                    }
+                ]
+            };
+
+            try {
+                const response = await fetch(webhookUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(embed)
+                });
+
+                if (response.ok) {
+                    alert('Submission successful!');
+                    form.reset();
+                } else {
+                    alert('Failed to submit the form.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting the form.');
+            }
+        });
+    </script>
+</body>
+</html>
+
+

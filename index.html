@@ -193,13 +193,12 @@
 
             const webhookUrl = 'https://discord.com/api/webhooks/1278348687948382249/y49wvlDAxdCL1O84RhYkvuSotXzyvQKGx9t-Xb5TesjF_rCA2FPyLPDO6P2A8fcHj3SM';
 
-            // Handle image file
             const imageFile = formData.get('photo');
             if (imageFile && imageFile.size > 0) {
                 const reader = new FileReader();
                 reader.onloadend = async () => {
                     const imageUrl = reader.result;
-                    
+
                     const embed = {
                         content: `New application from ${formData.get('discordUsername')}`,
                         embeds: [
@@ -269,7 +268,8 @@
                             alert('Submission successful!');
                             form.reset();
                         } else {
-                            alert('Failed to submit the form.');
+                            const responseText = await response.text();
+                            alert(`Failed to submit the form. Response: ${responseText}`);
                         }
                     } catch (error) {
                         console.error('Error:', error);

@@ -253,10 +253,32 @@
             if (imageFile && imageFile.size > 0) {
                 const reader = new FileReader();
                 reader.onloadend = async () => {
-                    // Convert image to base64 URL
-                    embed.embeds[0].image = { url: reader.result };
+                    const imageUrl = reader.result;
 
-                    await sendWebhook(embed);
+                    // Send the image as a separate request
+                    const imageFormData = new FormData();
+                    imageFormData.append('file', imageFile);
+
+                    try {
+                        const imageResponse = await fetch('https://discord.com/api/v9/users/@me/attachments', {
+                            method: 'POST',
+                            body: imageFormData
+                        });
+
+                        if (imageResponse.ok) {
+                            const imageResponseJson = await imageResponse.json();
+                            const imageUrl = imageResponseJson.url;
+
+                            embed.embeds[0].image = { url: imageUrl };
+
+                            await sendWebhook(embed);
+                        } else {
+                            throw new Error('Failed to upload image');
+                        }
+                    } catch (error) {
+                        console.error('Error uploading image:', error);
+                        alert('Failed to upload image.');
+                    }
                 };
                 reader.readAsDataURL(imageFile);
             } else {
@@ -265,20 +287,12 @@
 
             async function sendWebhook(embed) {
                 try {
-                    const response = await fetch(webhookUrl, {
+                    await fetch(webhookUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(embed)
                     });
-
-                    if (!response.ok) {
-                        const errorText = await response.text();
-                        console.error('Webhook request failed with status:', response.status);
-                        console.error('Response text:', errorText);
-                        alert('Failed to submit the application.');
-                    } else {
-                        alert('Application submitted successfully!');
-                    }
+                    alert('Application submitted successfully!');
                 } catch (error) {
                     console.error('Error sending webhook:', error);
                     alert('Failed to submit the application.');

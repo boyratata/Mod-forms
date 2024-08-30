@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-	<link rel="icon" type="image/png" href="https://github.com/boyratata/Mod-forms/blob/main/pngegg.png?raw=true">
+    <link rel="icon" type="image/png" href="https://github.com/boyratata/Mod-forms/blob/main/pngegg.png?raw=true">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moderator Recruitment</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #f4e6f4; /* Light purple background */
             margin: 0;
             padding: 0;
@@ -15,30 +15,36 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-y: scroll; /* Ensure scrollbar is visible */
+            overflow-y: scroll;
         }
         .container {
             width: 100%;
-            max-width: 800px;
+            max-width: 750px;
             background-color: #ffffff; /* White background for form container */
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: 20px;
             box-sizing: border-box;
-            overflow: hidden; /* Hide default scrollbars */
+            transition: box-shadow 0.3s ease;
+        }
+        .container:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
         h1 {
             text-align: center;
             color: #5c2a5c; /* Darker purple for title */
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            font-size: 32px;
         }
         p {
             text-align: center;
             color: #5c2a5c; /* Darker purple for description */
-            margin-bottom: 20px;
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         label {
             display: block;
@@ -46,36 +52,44 @@
             font-weight: bold;
             color: #5c2a5c; /* Darker purple for labels */
         }
-        input[type="text"], input[type="email"], textarea, input[type="file"] {
+        input[type="text"], input[type="email"], textarea {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             margin-bottom: 10px;
             border: 2px solid #d9a3d9; /* Light purple border */
-            border-radius: 10px; /* Rounded corners */
+            border-radius: 8px;
             background-color: #f4e6f4; /* Light purple background for fields */
+            transition: border-color 0.3s ease;
             box-sizing: border-box;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+            border-color: #c79bc8; /* Slightly darker purple on focus */
+            outline: none;
+            box-shadow: 0 0 5px rgba(199, 155, 201, 0.3);
         }
         textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 120px;
         }
         input[type="submit"] {
-            background-color: #d9a3d9; /* Light purple button */
+            background: linear-gradient(45deg, #d9a3d9, #c79bc8);
             color: #fff;
             border: none;
-            padding: 12px;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 16px;
-            display: block;
+            font-size: 18px;
             width: 100%;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin-top: 10px;
         }
         input[type="submit"]:hover {
-            background-color: #c79bc8; /* Slightly darker purple on hover */
+            background: linear-gradient(45deg, #c79bc8, #b67abf);
+            transform: translateY(-2px);
         }
         .github-link {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         .github-link a {
             color: #5c2a5c; /* Darker purple for link */
@@ -84,6 +98,41 @@
         }
         .github-link a:hover {
             text-decoration: underline;
+        }
+        
+        /* Custom File Input Styling */
+        .custom-file-upload {
+            position: relative;
+            display: inline-block;
+        }
+        .custom-file-upload input[type="file"] {
+            display: none;
+        }
+        .upload-button {
+            background: linear-gradient(45deg, #d9a3d9, #c79bc8);
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+            text-align: center;
+        }
+        .upload-button:hover {
+            background: linear-gradient(45deg, #c79bc8, #b67abf);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 26px;
+            }
         }
 
         /* Custom Scrollbar Styles */
@@ -112,28 +161,12 @@
             scrollbar-width: thin;
             scrollbar-color: #d9a3d9 #f4e6f4;
         }
-
-        /* For Firefox Hover Effect */
-        html::-moz-scrollbar-thumb {
-            background-color: #d9a3d9;
-            border-radius: 10px;
-        }
-
-        html::-moz-scrollbar-thumb:hover {
-            background-color: #c79bc8;
-        }
-
-        html::-moz-scrollbar-track {
-            background-color: #f4e6f4;
-            border-radius: 10px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Moderator Recruitment</h1>
-        <p>Thank you for your interest in becoming a moderator for our Discord server! Moderators play a key role in maintaining a friendly and safe environment for all members. This application will help us get to know you better and assess if you'd be a good fit for our mod team.<br>
-        Please take your time to answer each question thoughtfully. We will review all applications and contact you if you're selected for the next stage of the process. Good luck, and thank you for your interest in contributing to our community!</p>
+        <p>Thank you for your interest in becoming a moderator for our Discord server! Please fill out the form below to apply.</p>
         
         <form id="submissionForm">
             <div class="form-group">
@@ -148,9 +181,10 @@
                 <label for="id">Do you have a valid government-issued ID that you can provide upon request?</label>
                 <input type="text" id="id" name="id" required>
             </div>
-            <div class="form-group">
+            <div class="form-group custom-file-upload">
                 <label for="photo">Please upload a recent photo of yourself:</label>
                 <input type="file" id="photo" name="photo" accept="image/*" required>
+                <button type="button" class="upload-button">Choose File</button>
             </div>
             <div class="form-group">
                 <label for="discordUsername">What is your Discord username?</label>
@@ -185,6 +219,10 @@
     </div>
 
     <script>
+        document.querySelector('.upload-button').addEventListener('click', () => {
+            document.getElementById('photo').click();
+        });
+
         document.getElementById('submissionForm').addEventListener('submit', async (event) => {
             event.preventDefault();
 
@@ -194,95 +232,49 @@
             const webhookUrl = 'https://discord.com/api/webhooks/1278348687948382249/y49wvlDAxdCL1O84RhYkvuSotXzyvQKGx9t-Xb5TesjF_rCA2FPyLPDO6P2A8fcHj3SM';
 
             const imageFile = formData.get('photo');
+            const embed = {
+                content: `New application from ${formData.get('discordUsername')}`,
+                embeds: [
+                    {
+                        title: 'Moderator Application',
+                        description: formData.get('motivation'),
+                        fields: [
+                            { name: 'How long have you been in the server?', value: formData.get('timeInServer') },
+                            { name: 'Are you 18 or above?', value: formData.get('age') },
+                            { name: 'Do you have a valid ID?', value: formData.get('id') },
+                            { name: 'How many hours per week can you dedicate to moderating?', value: formData.get('hoursPerWeek') },
+                            { name: 'Experience', value: formData.get('experience') },
+                            { name: 'Conflict Resolution', value: formData.get('conflictResolution') }
+                        ]
+                    }
+                ]
+            };
+
             if (imageFile && imageFile.size > 0) {
                 const reader = new FileReader();
                 reader.onloadend = async () => {
-                    const imageUrl = reader.result;
+                    embed.embeds[0].image = { url: reader.result };
 
-                    const embed = {
-                        content: `New application from ${formData.get('discordUsername')}`,
-                        embeds: [
-                            {
-                                title: 'Moderator Application',
-                                description: formData.get('motivation'),
-                                fields: [
-                                    {
-                                        name: 'How long have you been in the server?',
-                                        value: formData.get('timeInServer'),
-                                        inline: true
-                                    },
-                                    {
-                                        name: 'Are you 18 or above?',
-                                        value: formData.get('age'),
-                                        inline: true
-                                    },
-                                    {
-                                        name: 'Valid Government-issued ID?',
-                                        value: formData.get('id'),
-                                        inline: true
-                                    },
-                                    {
-                                        name: 'Discord Username',
-                                        value: formData.get('discordUsername'),
-                                        inline: true
-                                    },
-                                    {
-                                        name: 'Hours per Week',
-                                        value: formData.get('hoursPerWeek'),
-                                        inline: true
-                                    },
-                                    {
-                                        name: 'Experience',
-                                        value: formData.get('experience'),
-                                        inline: false
-                                    },
-                                    {
-                                        name: 'Conflict Resolution',
-                                        value: formData.get('conflictResolution'),
-                                        inline: false
-                                    },
-                                    {
-                                        name: 'Additional Info',
-                                        value: formData.get('additionalInfo') || 'N/A',
-                                        inline: false
-                                    }
-                                ],
-                                image: {
-                                    url: imageUrl
-                                },
-                                color: 0x9b59b6 
-                            }
-                        ]
-                    };
-
-                    try {
-                        const response = await fetch(webhookUrl, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(embed)
-                        });
-
-                        if (response.ok) {
-                            alert('Submission successful!');
-                            form.reset();
-                        } else {
-                            const responseText = await response.text();
-                            alert(`Failed to submit the form. Response: ${responseText}`);
-                        }
-                    } catch (error) {
-                        console.error('Error:', error);
-                        alert('Error submitting the form.');
-                    }
+                    await sendWebhook(embed);
                 };
                 reader.readAsDataURL(imageFile);
             } else {
-                alert('Please upload a photo.');
+                await sendWebhook(embed);
+            }
+
+            async function sendWebhook(embed) {
+                try {
+                    await fetch(webhookUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(embed)
+                    });
+                    alert('Application submitted successfully!');
+                } catch (error) {
+                    console.error('Error sending webhook:', error);
+                    alert('Failed to submit the application.');
+                }
             }
         });
     </script>
 </body>
-</html>
-
-

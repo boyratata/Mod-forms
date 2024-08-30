@@ -265,12 +265,20 @@
 
             async function sendWebhook(embed) {
                 try {
-                    await fetch(webhookUrl, {
+                    const response = await fetch(webhookUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(embed)
                     });
-                    alert('Application submitted successfully!');
+
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Webhook request failed with status:', response.status);
+                        console.error('Response text:', errorText);
+                        alert('Failed to submit the application.');
+                    } else {
+                        alert('Application submitted successfully!');
+                    }
                 } catch (error) {
                     console.error('Error sending webhook:', error);
                     alert('Failed to submit the application.');

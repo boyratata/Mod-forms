@@ -253,22 +253,39 @@
             if (imageFile && imageFile.size > 0) {
                 const reader = new FileReader();
                 reader.onloadend = async () => {
-                    embed.embeds[0].image = { url: reader.result };
-                    await sendWebhook(embed);
+                    try {
+                        embed.embeds[0].image = { url: reader.result };
+                        await sendWebhook(embed);
+                    } catch (error) {
+                        console.error('Error processing image:', error);
+                        alert('Failed to process the image.');
+                    }
                 };
                 reader.readAsDataURL(imageFile);
             } else {
-                await sendWebhook(embed);
+                try {
+                    await sendWebhook(embed);
+                } catch (error) {
+                    console.error('Error sending webhook:', error);
+                    alert('Failed to submit the application.');
+                }
             }
 
             async function sendWebhook(embed) {
+                console.log('Sending webhook:', JSON.stringify(embed, null, 2));
                 try {
-                    await fetch(webhookUrl, {
+                    const response = await fetch(webhookUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(embed)
                     });
-                    alert('Application submitted successfully!');
+                    if (!response.ok) {
+                        const errorText = await response.text();
+                        console.error('Webhook request failed:', errorText);
+                        alert('Failed to submit the application. Check the console for details.');
+                    } else {
+                        alert('Application submitted successfully!');
+                    }
                 } catch (error) {
                     console.error('Error sending webhook:', error);
                     alert('Failed to submit the application.');

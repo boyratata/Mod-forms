@@ -253,6 +253,7 @@
             if (imageFile && imageFile.size > 0) {
                 const reader = new FileReader();
                 reader.onloadend = async () => {
+                    // Convert image to base64 URL
                     embed.embeds[0].image = { url: reader.result };
 
                     await sendWebhook(embed);

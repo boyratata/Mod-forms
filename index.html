@@ -231,7 +231,6 @@
 
             const webhookUrl = 'https://discord.com/api/webhooks/1278348687948382249/y49wvlDAxdCL1O84RhYkvuSotXzyvQKGx9t-Xb5TesjF_rCA2FPyLPDO6P2A8fcHj3SM';
 
-            const imageFile = formData.get('photo');
             const embed = {
                 content: `New application from ${formData.get('discordUsername')}`,
                 embeds: [
@@ -250,12 +249,11 @@
                 ]
             };
 
+            const imageFile = formData.get('photo');
             if (imageFile && imageFile.size > 0) {
                 const reader = new FileReader();
                 reader.onloadend = async () => {
-                    const imageBase64 = reader.result.split(',')[1]; // Get base64 part
-                    embed.embeds[0].image = { url: `data:image/png;base64,${imageBase64}` }; // Create data URL
-
+                    embed.embeds[0].image = { url: reader.result };
                     await sendWebhook(embed);
                 };
                 reader.readAsDataURL(imageFile);
@@ -265,16 +263,11 @@
 
             async function sendWebhook(embed) {
                 try {
-                    const response = await fetch(webhookUrl, {
+                    await fetch(webhookUrl, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(embed)
                     });
-
-                    if (!response.ok) {
-                        throw new Error(`Webhook request failed with status: ${response.status}`);
-                    }
-
                     alert('Application submitted successfully!');
                 } catch (error) {
                     console.error('Error sending webhook:', error);
